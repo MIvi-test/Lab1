@@ -24,11 +24,11 @@ typedef enum {
 } FIO;
 
 
-// typedef enum {
-//     EXAM = 0,       // Экзамен
-//     TEST = 1,       // Зачет
-//     COURSEWORK = 2  // Курсовая работа
-// } AssessmentType;
+typedef enum {
+    EXAM = 0,       // Экзамен
+    TEST = 1,       // Зачет
+    COURSEWORK = 2  // Курсовая работа
+} AssessmentType;
 
 typedef struct
 {
@@ -41,12 +41,12 @@ typedef struct
 
 typedef struct
 {      
-    char name[26];
-    char surname[29];
-    char middlename[30];
+    char name[25];
+    char surname[26];
+    char middlename[25];
+    unsigned char subjects[SUBEJCTS_LEN];
     unsigned char subjects_count;
-    unsigned char subjects_capacity;
-    Subject *subjects;
+
 } Person;
 
 static char* SUBJECT_NAMES[] = {
@@ -64,6 +64,7 @@ unsigned char MAX_SUBJECTS = DEFAULT_MAX_SUBJECTS;
 
 static Subject *links_on_sub = NULL;
 int seed;
+long long already_gen = 0;
 unsigned long ALL_MEMORY_USED_BY_STUDENTS = 0;
 
 #endif // DETER_H
