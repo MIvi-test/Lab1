@@ -7,11 +7,11 @@
 #include <stdint.h>
 #include <stdbool.h>
 #include <string.h>
-
+#include <locale.h>
 
 #define MAX_NAME_LENGTH 100
 #define MAX_GROUP_LENGTH 20
-#define MAX_SUBJECT_NAME_LENGTH 30
+#define MAX_SUBJECT_NAME_LENGTH 56
 #define DEFAULT_MIN_SUBJECTS 10
 #define DEFAULT_MAX_SUBJECTS 20
 #define SUBEJCTS_LEN 22
@@ -36,17 +36,17 @@ typedef struct
     unsigned char lab_room;
     unsigned char total_hours;
     unsigned char assessment_type;
-    char name[MAX_SUBJECT_NAME_LENGTH];
+    char *name;
 } Subject;
 
 typedef struct
 {      
+    char name[26];
+    char surname[29];
+    char middlename[30];
     unsigned char subjects_count;
     unsigned char subjects_capacity;
     Subject *subjects;
-    char name[31];
-    char surname[31];
-    char middlename[31];
 } Person;
 
 static char* SUBJECT_NAMES[] = {
@@ -59,7 +59,12 @@ static char* SUBJECT_NAMES[] = {
     "Кибербезопасность", "Компьютерная графика", "Программная инженерия"
 };
 
+unsigned char MIN_SUBJECTS = DEFAULT_MIN_SUBJECTS;
+unsigned char MAX_SUBJECTS = DEFAULT_MAX_SUBJECTS;
+
 static Subject *links_on_sub = NULL;
+
+unsigned long ALL_MEMORY_USED_BY_STUDENTS = 0;
 
 #endif // DETER_H
 
