@@ -63,7 +63,7 @@ unsigned char MIN_SUBJECTS = DEFAULT_MIN_SUBJECTS;
 unsigned char MAX_SUBJECTS = DEFAULT_MAX_SUBJECTS;
 
 static Subject *links_on_sub = NULL;
-
+int seed;
 unsigned long ALL_MEMORY_USED_BY_STUDENTS = 0;
 
 #endif // DETER_H

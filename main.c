@@ -2,8 +2,9 @@
 
 int get_random(int min, int max) // randint
 {
-    srand(time(NULL));
+    srand(seed);
     int random_number = min + rand() % (max - min - 1);
+    seed = (seed+random_number) % 54351245;
     return random_number;
 }
 
@@ -28,7 +29,7 @@ bool read_file(char *path, char *return_info, int max) // вспомогател
         fscanf(f, "%s\n", BUFFER);
     }
     fscanf(f, "%s\n", BUFFER);
-    printf("(1) %s\n", BUFFER); // просто для дебагинга, посмотреть что выдаёт
+    // printf("(1) %s\n", BUFFER); // просто для дебагинга, посмотреть что выдаёт
     strcpy(return_info, BUFFER);
     fclose(f);
     return true;
@@ -39,7 +40,7 @@ void christening(Person *student)
     char *path1, *path2, *path3;
     path1 = "lists/male_names_rus.txt";
     int max_name = 731;
-    path2 = "lists/male_names_rus.txt";
+    path2 = "lists/male_surnames_rus.txt";
     int max_surname = 14651;
     path3 = "lists/middlenames.txt";
     int max_middlename = 731;
@@ -95,7 +96,6 @@ bool get_subjects(unsigned char len, Person *student) // присвоение к
     student->subjects_capacity = sizeof(Subject) * len;
     for (char i = 0; i < len; i++)
     {
-        srand(time(NULL));
         unsigned char random_number = 1 + rand() % SUBEJCTS_LEN;
         for (char j = 0; j < i; j++)
         {
@@ -159,9 +159,11 @@ void clean() // суда закидывается массив студенто�
 int main()
 {   
     char *locale = setlocale(LC_ALL, "Rus"); 
+    seed = time(NULL)+1;
+    srand(seed);
     initialization_subjects(); //создаю список предметов, чтобы потом на них кидать ссылку, будет \
     // О(1) по памяти будет
-    Person *students = gen(2);
+    Person *students = gen(7);
 
     return 1;
 }
