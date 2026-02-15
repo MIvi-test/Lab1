@@ -376,14 +376,15 @@ int main()
       }
     }
 
-    // else if (!strncmp(buffer, "exit", 4))
-    // {
-    //   if (students != NULL)
-    //   {
-    //     clean(students);
-    //   }
-    // }
+    else if (!strncmp(buffer, "exit", 4))
+    {
 
+      if (ALL_MEMORY_USED_BY_STUDENTS != 0)
+      {
+        free(students);
+      }
+      return 0;
+    }
     else if (!strncmp(buffer, "get_size", 8))
     {
       get_size();
